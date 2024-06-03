@@ -1,41 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Friend } from "../../components/Friend";
 import { addFriend, removeFriend } from "../../services/users";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-
-
-export const FriendsPage = () =>{
-    const token = localStorage.getItem("token");
-    const friendUserId = "6659b01289099d487a51a345";
-    const [friendStatus, setFriendStatus] = useState(false);
+export const FriendsPage = () => {
+    const [results, setResults] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const handleAdd = async () => {
-        if (friendStatus == false) {
-        
-        try {
-            await addFriend(token, friendUserId);
-            navigate("/friends");
-        } catch (err) {
-            console.error(err);
-            navigate("/friends");
-        }
-        } else if (friendStatus == true) {
-            try {
-            await removeFriend(token, friendUserId);
-            navigate("/friends");
-        } catch (err) {
-            console.error(err);
-            navigate("/friends");
-        
-        }}
-        setFriendStatus(!friendStatus)}
+    const token = localStorage.getItem("token");
+    const userID = localStorage.getItem("userId");
+    
+
+    useEffect(() => {
+        fetch(`${BACKEND_URL}/users`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then((json) => {
+                const results = json.users.filter((user) => {
+                    return (
+                        user &&
+                        user.friends.includes(userID)
+                    );
+                });
+                setResults(results);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error);
+                setLoading(false);
+            });
+    }, [userID]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <>
-        <h1>Friends</h1>
-        < Friend />
-        <button onClick={ handleAdd }>{friendStatus ? 'Unfriend' : 'Add Friend'}</button>
-    </>
-    )
+            <h1>Friends</h1>
+            {results.length > 0 ? (
+                results.map((friend) => (
+                    <div key={friend.id}>
+                        <Friend friend={friend} />
+                    </div>
+                ))
+            ) : (
+                <p>No friends found.</p>
+            )}
+        </>
+    );
 };
+

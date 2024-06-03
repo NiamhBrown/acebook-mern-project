@@ -6,7 +6,9 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import Navbar from "../../components/navbar/navbar"
 import profilepicture from "../../assets/default_picture.png";
 import "./Profile.css";
-
+//import { Friend } from "../../components/Friend";
+import { addFriend, removeFriend } from "../../services/users";
+import FriendToggle from "./FriendToggle";
 
 
 
@@ -15,6 +17,10 @@ const UserProfile = ({ navigate, user}) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [results, setResults] = useState([{forename:"Loading User"}])
     let userID = useParams().userid
+    let ID = localStorage.getItem("userId")
+    const initialFriendStatus = user.friends.includes(userID)
+    const [friendStatus, setFriendStatus] = useState(initialFriendStatus);
+    
 
 
     useEffect(() => {
@@ -66,6 +72,32 @@ const UserProfile = ({ navigate, user}) => {
                 setResults(results);
             })
     }, [token]);
+    
+    
+    
+    
+    // const handleAdd = async () => {
+    //     if (friendStatus == false) {
+        
+    //     try {
+    //         await addFriend(token, userID);
+    //         //navigate("/friends");
+    //     } catch (err) {
+    //         console.error(err);
+    //         //navigate("/friends");
+    //     }
+    //     } else if (friendStatus == true) {
+    //         try {
+    //         await removeFriend(token, userID);
+    //         //navigate("/friends");
+    //     } catch (err) {
+    //         console.error(err);
+    //         //navigate("/friends");
+        
+    //     }}
+    //     setFriendStatus(!friendStatus)}
+    
+    
 
     return token ? (
         <>
@@ -74,7 +106,7 @@ const UserProfile = ({ navigate, user}) => {
                     <div className="divider"></div>
                     <img src={profilepicture} alt="default picture" id="default_pic_img" style={{ width: '100px', height: '100px' }}/>
                     <h1>{results[0].forename} {results[0].surname}</h1>
-                    <p>add friend buttons goes here</p>
+                    <FriendToggle friendId={userID} userId={ID}/>                  
                     <h2 className="post-heading">Posts</h2>
                     <div className="profile-container" role="profile">
                         {posts.map(post => (
@@ -87,3 +119,5 @@ const UserProfile = ({ navigate, user}) => {
 };
 
 export default UserProfile;
+
+
