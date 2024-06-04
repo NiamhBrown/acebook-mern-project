@@ -15,14 +15,16 @@ import FriendToggle from "./FriendToggle";
 const UserProfile = ({ navigate, user}) => {
     const [posts, setPosts] = useState([]);
     const [token, setToken] = useState(window.localStorage.getItem("token"));
-    const [results, setResults] = useState([{forename:"Loading User"}])
-    let userID = useParams().userid
-    let ID = localStorage.getItem("userId")
-    //const initialFriendStatus = user.friends.includes(userID)
-    //const [friendStatus, setFriendStatus] = useState(initialFriendStatus);
+    const [friendUser, setfriendUser] = useState({forename:"Loading User", friends:[]})
+    const [signedinuser, setSignedInUser] = useState({friends:[]})
+    let friendUserId = useParams().userid
+    let userId = localStorage.getItem("userId")
+    const initialFriendStatus = signedinuser.friends.includes(friendUserId);
+    const [isFriend, setIsFriend] = useState(initialFriendStatus);
+    
 
     useEffect(() => {
-        console.log("this is userid",userID)
+        console.log("this is userid",friendUserId)
         if (!token) {
             navigate("/login");
         }
@@ -43,7 +45,7 @@ const UserProfile = ({ navigate, user}) => {
                 console.log(data)
                 const posts = data.posts.filter((post) => {
                     return (
-                        post.user === userID)})
+                        post.user === friendUserId)})
                 window.localStorage.setItem("token", data.token);
                 setToken(data.token);
                 setPosts(posts);
@@ -60,18 +62,38 @@ const UserProfile = ({ navigate, user}) => {
                     return response.json();
             })
             .then((json) => {
-                console.log(json)
-                    const results = json.users.filter((user) => {
+                console.log("json",json)
+                    const friendUser = json.users.filter((user) => {
         
                     return (
-                        user._id === userID
+                        user._id === friendUserId //other users profile 
+                        
+
                     );
                 });
-                setResults(results);
-                console.log('this is results userprofile',results)
-            })
-    }, [token, userID]);
-    
+                const signedinuser = json.users.filter((user) => {
+        
+                    return (
+                        user._id === userId // Logged in profile
+                        
+
+                    );
+                });
+                
+                setfriendUser(friendUser[0]);
+                setSignedInUser(signedinuser[0])
+                console.log('this is friend user  ',friendUser)
+                console.log('this is signed in user ',signedinuser)
+            }).then((signedinuser)=>{
+            if (signedinuser) {
+
+                //const newIsFriend = signedinuser.friends.includes(friendUserId);
+                setIsFriend(!isFriend);
+    }})
+    }, [token, friendUserId, userId]
+    );
+
+
     
     
     
@@ -104,8 +126,8 @@ const UserProfile = ({ navigate, user}) => {
                 <main className="profile-main">
                     <div className="divider"></div>
                     <img src={profilepicture} alt="default picture" id="default_pic_img" style={{ width: '100px', height: '100px' }}/>
-                    <h1>{results[0].forename} {results[0].surname}</h1>
-                    <FriendToggle friendId={userID} userId={ID} user={results[0]}/>                  
+                    <h1>{friendUser.forename} {friendUser.surname}</h1>
+                    <FriendToggle friendId={friendUserId} userId={userId} user={friendUser} isFriend={isFriend}/>                  
                     <h2 className="post-heading">Posts</h2>
                     <div className="profile-container" role="profile">
                         {posts.map(post => (

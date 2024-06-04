@@ -3,19 +3,18 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { useNavigate } from 'react-router-dom';
 
 
-function FriendToggle({ userId, friendId, user}) {
+function FriendToggle({ userId, friendId, user, isFriend}) {
+    console.log(user)
     console.log('user friends', user.friends)
     const friends = user.friends
     console.log(friends, "friends")
-    // console.log('This is user friendtoggle',user)
-    // console.log('friend id', friendId)
-    //const initialFriendState = friends.includes(userId)
-    // console.log('initialfriendsstate',initialFriendState)
-    const [isFriend, setIsFriend] = useState(false); // Assuming default not friends
+    const [localIsFriend, setLocalIsFriend] = useState(isFriend); // Use prop for initial state
+    
 
     const handleAdd = () => {
+        setLocalIsFriend(!localIsFriend);
         const url = `${BACKEND_URL}/users/friends`;
-        const method = isFriend ? 'DELETE' : 'POST'; // DELETE to unfriend, POST to add friend
+        const method = localIsFriend ? 'DELETE' : 'POST'; // DELETE to unfriend, POST to add friend
         let token = localStorage.getItem('token');
         fetch(url, {
             method: method,
@@ -39,14 +38,14 @@ function FriendToggle({ userId, friendId, user}) {
             console.log('Friend status updated:', data);
         })
         .catch(error => {
+            setLocalIsFriend(!localIsFriend);
             console.error('Error updating friend status:', error);
         });
-        setIsFriend(!isFriend);
     };
     ;
     return (
         <button onClick={handleAdd}>
-            {isFriend ? 'Unfriend' : 'Add Friend'}
+            {localIsFriend ? 'Unfriend' : 'Add Friend'}
         </button>
     );
 }
