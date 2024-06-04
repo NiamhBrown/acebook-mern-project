@@ -3,7 +3,7 @@ const User = require("../models/user");
 const { generateToken } = require("../lib/token");
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find().sort({ createdAt: -1 }); //sorts post in decending order of createdAt
+  const posts = await Post.find().sort({ createdAt: -1 }).populate('comments');; //sorts post in decending order of createdAt
   const token = generateToken(req.user_id);
   res.status(200).json({ posts: posts, token: token });
 };

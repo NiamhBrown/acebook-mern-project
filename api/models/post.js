@@ -9,6 +9,7 @@ const PostSchema = new mongoose.Schema({
   username: String,
   message: String,
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
   createdAt: { type: Date, default: Date.now },
 });
 console.log(PostSchema);

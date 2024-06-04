@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+// import React from 'react';
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { createPost } from '../services/posts';
+import { createComment } from "../../services/comments";
 
-export const SubmitPost = (props) => {
+export const SubmitComment = (props) => {
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const token = props.token;
+    const postId = props.postId;
     
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const newPost = await createPost(token, message);
-            props.onPostCreated(newPost);
+            const newComment = await createComment(token, message, postId);
+            props.handleCommentCreated(newComment)
             setMessage("");
             navigate("/posts");
         } catch (err) {
@@ -24,18 +25,17 @@ export const SubmitPost = (props) => {
 
     return(
         <div>
-            <h1>Create Post</h1>
             <form onSubmit={handleSubmit}>
                 <textarea
                 name="message"
                 value={message}
-                placeholder="What's on your mind..."
+                placeholder="Add a comment..."
                 onChange={(event) => setMessage(event.target.value)}></textarea>
                 <br />
-                <button type="submit">Create Post</button>
+                <button type="submit">Create Comment</button>
             </form>
         </div>
     );
 };
 
-export default SubmitPost;
+export default SubmitComment;
