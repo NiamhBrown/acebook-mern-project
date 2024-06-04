@@ -18,7 +18,7 @@ const data = await response.json();
 return data;
 };
 
-export const addFriend = async (token, friendUserId) => {
+export const addFriend = async (token=null, friendUserId) => {
     const payload = {
         token: token,
         friendUserId: friendUserId
