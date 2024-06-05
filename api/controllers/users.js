@@ -50,8 +50,8 @@ const addFriend = async (req, res) => {
     if (!user.friends.includes(friendId)) {
       user.friends.push(friendId)
       await user.save();
-      friend.friends.push(userId)
-      await friend.save();
+      //friend.friends.push(userId)
+      //await friend.save();
     }
     const newToken = generateToken(req.user_id);
     console.log(`users line 55 ${newToken}`)
@@ -91,12 +91,35 @@ const removeFriend = async (req, res) => {
   }
 };
 
+const denyFriend = async (req, res) => {
+  try{
+    const userId = req.user_id;
+    const friendId = req.body.friendUserId;
+    const friend = await User.findById(friendId)
+    const userIndex = friend.friends.indexOf(userId);
+    if (userIndex === -1) {
+      return res.status(400).json({ message: "You are not friends anyway" });
+  }
+    if(friend.friends.includes(userId)){
+      friend.friends.splice(userIndex, 1);
+      await friend.save()
+    }
+    const newToken = generateToken(req.user_id);
+    res.status(200).json({ message: "Friend removed", token: newToken });
+  }   catch (error) {
+      console.error("Internal server error:", error);
+      res.status(500).json({ message: "Internal server error" });
+  }
+
+};
+
 const UsersController = {
   create: create,
   getAllUsers: getAllUsers,
   getOneUser: getOneUser,
   addFriend: addFriend,
-  removeFriend: removeFriend
+  removeFriend: removeFriend,
+  denyFriend: denyFriend
 
 };
 

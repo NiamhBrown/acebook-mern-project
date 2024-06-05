@@ -33,6 +33,7 @@ const Navbar =  (token) => {
                 </div>
             </div>
             <div className= "navbar-right">
+                <Link to = {"/requests"}>Friend Requests</Link>
                 <Link to = {"/friends"}>Friends</Link>
                 <Link to = {"/profile"}>Profile</Link>
                 <button onClick={handleLogout} id="button1">

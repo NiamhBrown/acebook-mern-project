@@ -12,7 +12,7 @@ router.get("/profile:{userid}", UsersController.getOneUser)
 
 router.post("/friends", tokenChecker, UsersController.addFriend);
 router.delete("/friends", tokenChecker, UsersController.removeFriend);
-
+router.delete("/friends/deny", tokenChecker, UsersController.denyFriend);
 
 module.exports = router;
 
