@@ -8,6 +8,7 @@ const tokenChecker = (req, res, next) => {
   if (authHeader) {
     token = authHeader.slice(7);
   }
+  
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) {

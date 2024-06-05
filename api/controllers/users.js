@@ -45,13 +45,16 @@ const addFriend = async (req, res) => {
     console.log("does the user exist?", user.friends.includes(friendId));
     if (user.friends.includes(friendId)) {
       return res.status(400).json({ message: "You are already friends!" });
+      console.log("line 48 users")
     }
 
     if (!user.friends.includes(friendId)) {
+      console.log("Line 52 users")
       user.friends.push(friendId)
       await user.save();
     }
     const newToken = generateToken(req.user_id);
+    console.log(`users line 55 ${newToken}`)
     res.status(200).json({ message: "Friend Added", token: newToken });
   } catch (error) {
     console.error("Internal server error:", error);
@@ -75,6 +78,7 @@ const removeFriend = async (req, res) => {
       await user.save();
     }
     const newToken = generateToken(req.user_id);
+    console.log(`line 79 users ${newToken}`)
     res.status(200).json({ message: "Friend removed", token: newToken });
   } catch (error) {
     console.error("Internal server error:", error);

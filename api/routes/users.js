@@ -10,7 +10,7 @@ router.post("/", UsersController.create);
 router.get("/profile", UsersController.getOneUser)
 router.get("/profile:{userid}", UsersController.getOneUser)
 
-router.post("/friends",tokenChecker, UsersController.addFriend);
+router.post("/friends", tokenChecker, UsersController.addFriend);
 router.delete("/friends", tokenChecker, UsersController.removeFriend);
 
 
