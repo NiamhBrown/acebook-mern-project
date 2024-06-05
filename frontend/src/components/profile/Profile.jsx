@@ -3,7 +3,7 @@ import { useNavigate} from "react-router-dom";
 import { getPosts } from "../../services/posts";
 import Post from "../Post/Post";
 import Navbar from "../../components/navbar/navbar"
-import profilepicture from "../../assets/default_picture.png";
+import defaultProfilePicture from "../../assets/default_picture.png";
 import "./Profile.css";
 import ProfilePictureUpload from "../ProfilePicture/ProfilePictureUpload";
 import { getOneUser } from "../../services/users";
@@ -17,6 +17,11 @@ export const Profile = () => {
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [signedInUser, setSignedInUser] = useState({forename: 'loading', username: 'loading'})
+
+    const serverUrl = "http://localhost:3000";
+    const profileImageUrl = signedInUser.profilePicture 
+      ? `${serverUrl}${signedInUser.profilePicture}` 
+      : defaultProfilePicture;
 
     useEffect(() => {
         if (token) {
@@ -52,7 +57,7 @@ export const Profile = () => {
         }
         }, []);
 
-        console.log("THIS IS SIGNED IN USER", signedInUser.profilePicture)
+        console.log("THIS IS SIGNED IN USER profile pic", signedInUser.profilePicture)
 
     return token ? (
         <>
@@ -60,8 +65,8 @@ export const Profile = () => {
             <Navbar/>
                 <main className="profile-main">
                     <div className="divider"></div>
-                    <img src={signedInUser.profilePicture} alt="page logo" style={{ width: '200px', height: '200px' }}/>
-                    {/* <img src={signedInUser.profilePicture || profilepicture} alt="page logo" id="default_img" style={{ width: '200px', height: '200px' }}/> */}
+                    {/* <img src={signedInUser.profilePicture || defaultProfilePicture} alt="users profile pic" style={{ width: '200px', height: '200px' }}/> */}
+                    <img src={profileImageUrl} alt="User's profile pic" style={{ width: '200px', height: '200px' }} />
                     <ProfilePictureUpload token={token}/> 
                     <h1>{signedInUser.forename} {signedInUser.surname}</h1>
                     <h2 className="post-heading">Posts</h2>

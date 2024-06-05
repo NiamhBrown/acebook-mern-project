@@ -1,13 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const commentsRouter = require("./routes/comments");
 const authenticationRouter = require("./routes/authentication");
 const tokenChecker = require("./middleware/tokenChecker");
-// const path = require('path');
+
 
 const app = express();
 
@@ -19,12 +20,17 @@ app.use(cors());
 // Parse JSON request bodies, made available on `req.body`
 app.use(bodyParser.json());
 
+// Serve static files from the "uploads" directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+console.log('Serving files from:', path.join(__dirname, 'uploads'));
+
 // API Routes
 app.use("/users", usersRouter);
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", authenticationRouter);
-app.use("/uploads", express.static("uploads"));
+
+
 
 
 // 404 Handler
