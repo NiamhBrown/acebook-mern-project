@@ -2,14 +2,11 @@ import { useState, useEffect } from "react";
 import { useNavigate} from "react-router-dom";
 import { getPosts } from "../../services/posts";
 import Post from "../Post/Post";
+import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import Navbar from "../../components/navbar/navbar"
 import defaultProfilePicture from "../../assets/default_picture.png";
-import "./Profile.css";
 import ProfilePictureUpload from "../ProfilePicture/ProfilePictureUpload";
 import { getOneUser } from "../../services/users";
-
-
-
 
 export const Profile = () => {
     const [posts, setPosts] = useState([]);
@@ -20,8 +17,8 @@ export const Profile = () => {
 
     const serverUrl = "http://localhost:3000";
     const profileImageUrl = signedInUser.profilePicture 
-      ? `${serverUrl}${signedInUser.profilePicture}` 
-      : defaultProfilePicture;
+    ? `${serverUrl}${signedInUser.profilePicture}` 
+    : defaultProfilePicture;
 
     useEffect(() => {
         if (token) {
@@ -64,10 +61,9 @@ export const Profile = () => {
         
             <Navbar/>
                 <main className="profile-main">
-                    <div className="divider"></div>
-                    {/* <img src={signedInUser.profilePicture || defaultProfilePicture} alt="users profile pic" style={{ width: '200px', height: '200px' }}/> */}
                     <img src={profileImageUrl} alt="User's profile pic" style={{ width: '200px', height: '200px' }} />
                     <ProfilePictureUpload token={token}/> 
+                    <ProfilePicture token={token}/>
                     <h1>{signedInUser.forename} {signedInUser.surname}</h1>
                     <h2 className="post-heading">Posts</h2>
                     <div className="profile-container" role="profile">

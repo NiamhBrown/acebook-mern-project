@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { uploadProfilePicture } from "../../services/users";
 
 const ProfilePictureUpload = ({ token }) => {
