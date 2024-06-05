@@ -10,6 +10,7 @@ import { ProfilePage } from "./pages/profile/ProfilePage";
 import UserProfile from "./components/profile/UserProfile";
 
 import { FriendsPage } from "./pages/Friend/FriendsPage";
+import { RequestPage } from "./pages/Requests/RequestsPage";
 
 
 // docs: https://reactrouter.com/en/main/start/overview
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: "/friends",
     element: <FriendsPage/>
+  },
+  {
+    path: "/requests",
+    element: <RequestPage/>
   }
 
 ]);

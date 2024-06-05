@@ -6,9 +6,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import Navbar from "../../components/navbar/navbar"
 import profilepicture from "../../assets/default_picture.png";
 import "./Profile.css";
-
-
-
+import FriendsPage from "../../pages/Friend/FriendsPage";
 
 const Profile = ({ navigate, user }) => {
     const [posts, setPosts] = useState([]);
@@ -78,6 +76,7 @@ const Profile = ({ navigate, user }) => {
                         {posts.map(post => (
                             <Post key={post._id} post={post} token={token} user={user} />
                         ))}
+                        <FriendsPage/>
                     </div>
                 </main>
         </>

@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Friend } from "../../components/Friend";
 import { addFriend, removeFriend } from "../../services/users";
 import Navbar from "../../components/navbar/navbar";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const FriendsPage = () => {
+export const OtherFriendsPage = ({friendUserId}) => {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const userID = localStorage.getItem("userId");
-    
+    const otherUserId  =  friendUserId; 
 
     useEffect(() => {
+        console.log('other user id',otherUserId)
         fetch(`${BACKEND_URL}/users`)
             .then(response => {
                 if (!response.ok) {
@@ -23,14 +24,17 @@ export const FriendsPage = () => {
                 return response.json();
             })
             .then((json) => {
-                const loggedInUser = json.users.find((user) => user._id === userID)
+                const otherUser = json.users.find((user) => user._id === otherUserId)
                 const results = json.users.filter((user) => {
                     return (
                         user &&
-                        loggedInUser.friends.includes(user._id)&& // if theyre are in your friends lists
-                        user.friends.includes(userID) // if you are in their friends lists
+                        otherUser.friends.includes(user._id) && // if theyre are in your friends lists
+                        user.friends.includes(otherUserId) // if you are in their friends lists
                     );
                 });
+                // console.log('otheruser',otherUser)
+                // console.log('otheruser friends',otherUser.friends)
+                // otherUser.friends.push(userID)
                 setResults(results);
                 setLoading(false);
             })
@@ -45,8 +49,11 @@ export const FriendsPage = () => {
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
-    }
+        console.log('error',error)
+        return (<>
+            <h1>Friends</h1>
+            <div>Error: No Friends Found</div>
+            </>)};
 
     return (
         <>
@@ -64,6 +71,4 @@ export const FriendsPage = () => {
         </>
     );
 };
-
-export default FriendsPage;
 

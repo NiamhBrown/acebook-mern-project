@@ -20,7 +20,9 @@ function FriendToggle({ userId, friendId, isFriend, setIsFriend }) {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ friendUserId: friendId }),
+                body: JSON.stringify({ friendUserId: friendId //userid 
+                    
+                }),
             });
 
             if (!response.ok) {
