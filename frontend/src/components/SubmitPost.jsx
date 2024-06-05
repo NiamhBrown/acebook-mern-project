@@ -14,10 +14,10 @@ export const SubmitPost = (props) => {
             const newPost = await createPost(token, message);
             props.onPostCreated(newPost);
             setMessage("");
-            navigate("/posts");
+            //navigate("/posts");
         } catch (err) {
             console.error(err);
-            navigate("/posts");
+            //navigate("/posts");
         }
         
     };

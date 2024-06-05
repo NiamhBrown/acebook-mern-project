@@ -15,10 +15,10 @@ export const SubmitComment = (props) => {
             const newComment = await createComment(token, message, postId);
             props.handleCommentCreated(newComment)
             setMessage("");
-            navigate("/posts");
+            //navigate("/posts");
         } catch (err) {
             console.error(err);
-            navigate("/posts");
+            //navigate("/posts");
         }
         
     };
