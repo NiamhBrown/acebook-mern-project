@@ -7,10 +7,10 @@ const getAllUsers = async (req, res) => {
   res.status(200).json({ users: users, token: token });
 };
 
-const getOneUser = async (req, res, userID) => {
-  const user = await User.find(UserID);
+const getOneUser = async (req, res) => {
+  const user = await User.find({_id:req.user_id});
   const token = generateToken(req.user_id);
-  res.status(200).json({ users: users, token: token });
+  res.status(200).json({ user: user, token: token });
 };
 
 const create = (req, res) => {
@@ -86,12 +86,24 @@ const removeFriend = async (req, res) => {
   }
 };
 
+const addProfilePicture = async (req, res) => {
+  try {
+    const user = await User.findById({_id: req.user_id});
+    user.profilePicture = "/uploads/" + req.file.filename;
+    await user.save();
+    res.status(200).json({message: "Profile picture updated", profilePicture: user.profilePicture });
+  } catch (error) {
+    res.status(500).json({ message: "Error uploading profile picture" });
+  };
+};
+
 const UsersController = {
   create: create,
   getAllUsers: getAllUsers,
   getOneUser: getOneUser,
   addFriend: addFriend,
-  removeFriend: removeFriend
+  removeFriend: removeFriend,
+  addProfilePicture: addProfilePicture
 
 };
 
