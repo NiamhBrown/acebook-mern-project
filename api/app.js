@@ -7,6 +7,7 @@ const postsRouter = require("./routes/posts");
 const commentsRouter = require("./routes/comments");
 const authenticationRouter = require("./routes/authentication");
 const tokenChecker = require("./middleware/tokenChecker");
+// const path = require('path');
 
 const app = express();
 

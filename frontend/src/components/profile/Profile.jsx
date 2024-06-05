@@ -52,7 +52,7 @@ export const Profile = () => {
         }
         }, []);
 
-        console.log("THIS IS SIGNED IN USER", signedInUser)
+        console.log("THIS IS SIGNED IN USER", signedInUser.profilePicture)
 
     return token ? (
         <>
@@ -60,7 +60,8 @@ export const Profile = () => {
             <Navbar/>
                 <main className="profile-main">
                     <div className="divider"></div>
-                    <img src={signedInUser.profilePicture || profilepicture} alt="page logo" id="default_img" style={{ width: '200px', height: '200px' }}/>
+                    <img src={signedInUser.profilePicture} alt="page logo" style={{ width: '200px', height: '200px' }}/>
+                    {/* <img src={signedInUser.profilePicture || profilepicture} alt="page logo" id="default_img" style={{ width: '200px', height: '200px' }}/> */}
                     <ProfilePictureUpload token={token}/> 
                     <h1>{signedInUser.forename} {signedInUser.surname}</h1>
                     <h2 className="post-heading">Posts</h2>
