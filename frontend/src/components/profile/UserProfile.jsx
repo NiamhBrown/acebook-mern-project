@@ -1,144 +1,85 @@
 import { useState, useEffect } from "react";
-import { Link , useNavigate, useParams} from "react-router-dom";
-import { getPosts } from "../../services/posts";
-import Post from "../Post/Post";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-import Navbar from "../../components/navbar/navbar"
+import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "../../components/navbar/navbar";
 import profilepicture from "../../assets/default_picture.png";
 import "./Profile.css";
-import { Friend } from "../../components/Friend";
-import { addFriend, removeFriend } from "../../services/users";
+import Post from "../Post/Post";
 import FriendToggle from "./FriendToggle";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-
-const UserProfile = ({ navigate, user}) => {
+const UserProfile = ({ user }) => {
     const [posts, setPosts] = useState([]);
     const [token, setToken] = useState(window.localStorage.getItem("token"));
-    const [friendUser, setfriendUser] = useState({forename:"Loading User", friends:[]})
-    const [signedinuser, setSignedInUser] = useState({friends:[]})
-    let friendUserId = useParams().userid
-    let userId = localStorage.getItem("userId")
-    const initialFriendStatus = signedinuser.friends.includes(friendUserId);
-    const [isFriend, setIsFriend] = useState(initialFriendStatus);
-    
+    const [friendUser, setFriendUser] = useState({ forename: "Loading User", friends: [] });
+    const [signedInUser, setSignedInUser] = useState({ friends: [] });
+    const [isFriend, setIsFriend] = useState(false);
+    const navigate = useNavigate();
+    const { userid: friendUserId } = useParams();
+    const userId = localStorage.getItem("userId");
 
     useEffect(() => {
-        console.log("this is userid",friendUserId)
         if (!token) {
             navigate("/login");
         }
     }, [token, navigate]);
 
     useEffect(() => {
-        if (token) {
-            fetch(`${BACKEND_URL}/posts`, {
-                headers: { Authorization: `Bearer ${token}` },
-            })
-            .then((response) => {
-                if (!response.ok) {
+        const fetchData = async () => {
+            try {
+                const postsResponse = await fetch(`${BACKEND_URL}/posts`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                if (!postsResponse.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data)
-                const posts = data.posts.filter((post) => {
-                    return (
-                        post.user === friendUserId)})
-                window.localStorage.setItem("token", data.token);
-                setToken(data.token);
-                setPosts(posts);
-            })
-            .catch((error) => {
-                console.error('Failed to fetch posts:', error);
-            });
-        }   
-        fetch(`${BACKEND_URL}/users`) 
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.json();
-            })
-            .then((json) => {
-                console.log("json",json)
-                    const friendUser = json.users.filter((user) => {
-        
-                    return (
-                        user._id === friendUserId //other users profile 
-                        
+                const postsData = await postsResponse.json();
+                const userPosts = postsData.posts.filter((post) => post.user === friendUserId);
+                setPosts(userPosts);
+                window.localStorage.setItem("token", postsData.token);
+                setToken(postsData.token);
 
-                    );
-                });
-                const signedinuser = json.users.filter((user) => {
-        
-                    return (
-                        user._id === userId // Logged in profile
-                        
+                const usersResponse = await fetch(`${BACKEND_URL}/users`);
+                if (!usersResponse.ok) {
+                    throw new Error('Network response was not ok ' + usersResponse.statusText);
+                }
+                const usersData = await usersResponse.json();
+                const friendUserData = usersData.users.find((user) => user._id === friendUserId);
+                const signedInUserData = usersData.users.find((user) => user._id === userId);
 
-                    );
-                });
-                
-                setfriendUser(friendUser[0]);
-                setSignedInUser(signedinuser[0])
-                console.log('this is friend user  ',friendUser)
-                console.log('this is signed in user ',signedinuser)
-            }).then((signedinuser)=>{
-            if (signedinuser) {
+                setFriendUser(friendUserData);
+                setSignedInUser(signedInUserData);
 
-                //const newIsFriend = signedinuser.friends.includes(friendUserId);
-                setIsFriend(!isFriend);
-    }})
-    }, [token, friendUserId, userId]
-    );
+                if (signedInUserData.friends.includes(friendUserId)) {
+                    setIsFriend(true);
+                }
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
+        };
 
-
-    
-    
-    
-    // const handleAdd = async () => {
-    //     if (friendStatus == false) {
-        
-    //     try {
-    //         await addFriend(token, userID);
-    //         //navigate("/friends");
-    //     } catch (err) {
-    //         console.error(err);
-    //         //navigate("/friends");
-    //     }
-    //     } else if (friendStatus == true) {
-    //         try {
-    //         await removeFriend(token, userID);
-    //         //navigate("/friends");
-    //     } catch (err) {
-    //         console.error(err);
-    //         //navigate("/friends");
-        
-    //     }}
-    //     setFriendStatus(!friendStatus)}
-    
-    
+        if (token) {
+            fetchData();
+        }
+    }, [token, friendUserId, userId]);
 
     return token ? (
         <>
-            <Navbar/>
-                <main className="profile-main">
-                    <div className="divider"></div>
-                    <img src={profilepicture} alt="default picture" id="default_pic_img" style={{ width: '100px', height: '100px' }}/>
-                    <h1>{friendUser.forename} {friendUser.surname}</h1>
-                    <FriendToggle friendId={friendUserId} userId={userId} user={friendUser} isFriend={isFriend}/>                  
-                    <h2 className="post-heading">Posts</h2>
-                    <div className="profile-container" role="profile">
-                        {posts.map(post => (
-                            <Post key={post._id} post={post} token={token} user={user} />
-                        ))}
-                    </div>
-                </main>
+            <Navbar />
+            <main className="profile-main">
+                <div className="divider"></div>
+                <img src={profilepicture} alt="default picture" id="default_pic_img" style={{ width: '100px', height: '100px' }} />
+                <h1>{friendUser.forename} {friendUser.surname}</h1>
+                <FriendToggle friendId={friendUserId} userId={userId} user={signedInUser} isFriend={isFriend} setIsFriend={setIsFriend} />
+                <h2 className="post-heading">Posts</h2>
+                <div className="profile-container" role="profile">
+                    {posts.map(post => (
+                        <Post key={post._id} post={post} token={token} user={user} />
+                    ))}
+                </div>
+            </main>
         </>
     ) : null;
 };
 
 export default UserProfile;
-
-
