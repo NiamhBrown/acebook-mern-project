@@ -5,7 +5,7 @@ import profilepicture from "../../assets/default_picture.png";
 import "./Profile.css";
 import Post from "../Post/Post";
 import FriendToggle from "./FriendToggle";
-
+import { OtherFriendsPage } from "../../pages/Friend/OtherFriendsPage";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const UserProfile = ({ user }) => {
@@ -70,13 +70,15 @@ const UserProfile = ({ user }) => {
                 <div className="divider"></div>
                 <img src={profilepicture} alt="default picture" id="default_pic_img" style={{ width: '100px', height: '100px' }} />
                 <h1>{friendUser.forename} {friendUser.surname}</h1>
-                <FriendToggle friendId={friendUserId} userId={userId} user={signedInUser} isFriend={isFriend} setIsFriend={setIsFriend} />
+                <FriendToggle friendId={friendUserId} userId={userId}  user={signedInUser} isFriend={isFriend} setIsFriend={setIsFriend} />
                 <h2 className="post-heading">Posts</h2>
                 <div className="profile-container" role="profile">
                     {posts.map(post => (
                         <Post key={post._id} post={post} token={token} user={user} />
                     ))}
+                    <OtherFriendsPage friendUserId={friendUserId}/>
                 </div>
+                
             </main>
         </>
     ) : null;

@@ -20,7 +20,11 @@ const Navbar =  (token) => {
         <nav className="navbar" id="navbar">
             <div className = "container">
                 <img src={logo} alt="page logo" id="logo_img"/>
-                <div id="logo">Acebook</div>
+                <div>
+                    <Link to="/posts">
+                        <div id="logo">Acebook</div>
+                    </Link>
+                </div>
             </div>
             <div className = "navbar-left">
                 <div>

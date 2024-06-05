@@ -7,13 +7,13 @@ import { likeComment, unlikeComment } from "../../services/comments"; //createCo
 
 
 const Comment = (props) => {
-    console.log("this is the commentprops:", props)
+    //console.log("this is the commentprops:", props)
   // const navigate = useNavigate(); NOT BEING USED CURRENTLY
     const token = props.token;
     // const postId = props.post._id;
     const commentId = props.comment._id;
     const commentTimestamp = props.comment.createdAt;
-    console.log("This is the message",props.comment.message);
+    //console.log("This is the message",props.comment.message);
     const userId = localStorage.getItem("userId");
     const initialLikeCount = props.comment.likes.length;
     const initialLikeStatus = props.comment.likes.includes(userId)
