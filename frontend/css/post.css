@@ -14,8 +14,8 @@
 }
 
 .post-header img {
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    width: 55px; /* Adjust the size as needed */
+    height: 55px; /* Adjust the size as needed */
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #ccc; /* Optional: Add a border */
@@ -64,8 +64,8 @@ textarea {
 }
 
 .comment-header img {
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    width: 45px; /* Adjust the size as needed */
+    height: 45px; /* Adjust the size as needed */
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #ccc; /* Optional: Add a border */
@@ -106,9 +106,42 @@ textarea {
         gap: 10px; /* Adjust spacing between ProfilePicture and single-comment */
     }
 
-    .comment-like-section {
+.comment-like-section {
         display: flex;
         justify-content: flex-end; /* Align items to the right */
         align-items: center; /* Center items vertically */
         gap: 10px; /* Optional: Add space between items */
+        width: 880px;
     }
+
+/* profile page */
+.profile-header{
+    text-align: center;
+
+}
+.profile-header img {
+    width: 300px; /* Adjust the size as needed */
+    height: 300px; /* Adjust the size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc; /* Optional: Add a border */
+
+}
+
+/* friends page */
+.single-friend img{
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc; /* Optional: Add a border */
+
+}
+
+.single-friend {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Optional: Center align items */
+    gap: 10px; /* Optional: Add space between items */
+    margin: 20px;
+}

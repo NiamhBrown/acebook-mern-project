@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { uploadProfilePicture } from "../../services/users";
+import "../../../css/post.css"
+import "../../../css/main.css"
 
 const ProfilePictureUpload = ({ token }) => {
     const [profilePicture, setProfilePicture] = useState(null)
@@ -23,13 +25,13 @@ const ProfilePictureUpload = ({ token }) => {
     return (
         
         <div>
-        <button onClick={() => setIsFormVisible(!isFormVisible)}>
+        <button className= "primary-button" onClick={() => setIsFormVisible(!isFormVisible)}>
             {isFormVisible ? "Cancel" : "Upload Picture"}
         </button>
         {isFormVisible && (
             <div>
                 <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUpload}>Upload</button>
+                <button  onClick={handleUpload}>Upload</button>
             </div>
         )}
     </div>

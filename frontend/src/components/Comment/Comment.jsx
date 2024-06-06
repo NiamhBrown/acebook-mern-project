@@ -59,9 +59,10 @@ const Comment = (props) => {
             <article className="comment-content">{props.comment.message}</article>
         </div>
     </div>
-
-        <button className="comment-like-button" onClick={ handleLike }>{likeStatus ? <AiFillLike /> : <AiOutlineLike />}</button>
-        <p className="comment-like-count">{likeCount} likes</p>
+        <div className="comment-like-section">
+            <button className="comment-like-button" onClick={ handleLike }>{likeStatus ? <AiFillLike /> : <AiOutlineLike />}</button>
+            <p className="comment-like-count">{likeCount} likes</p>
+        </div>
         </div>
 };
 
