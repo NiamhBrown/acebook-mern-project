@@ -1,4 +1,5 @@
 
+import "../../../css/main.css"
 import defaultProfilePicture from "../../assets/default_picture.png";
 
 
@@ -12,10 +13,11 @@ export const ProfilePicture = ({userId}) => {
     };
 
     return (
+
             <img src={profileImageUrl} 
             alt="User's profile pic"
             onError={handleError}
-            style={{ width: '200px', height: '200px' }} />
+            className = "circular-image" />
     );
 };
 

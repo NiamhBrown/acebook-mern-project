@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Friend } from "../../components/Friend";
-import { addFriend, removeFriend } from "../../services/users";
 import Navbar from "../../components/navbar/navbar";
+import "../../../css/main.css"
+import "../../../css/post.css"
+
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const FriendsPage = () => {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
-    const token = localStorage.getItem("token");
     const userID = localStorage.getItem("userId");
     
 
@@ -51,7 +51,7 @@ export const FriendsPage = () => {
     return (
         <>
             <Navbar/>
-            <h1>Friends</h1>
+            <h1>My Friends</h1>
             {results.length > 0 ? (
                 results.map((friend) => (
                     <div key={friend._id}>

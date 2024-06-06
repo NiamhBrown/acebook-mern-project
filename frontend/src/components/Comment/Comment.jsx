@@ -1,19 +1,15 @@
 import "../../../css/post.css"
+import "../../../css/main.css"
 import { useState } from "react";
 import { formatDistanceToNow } from 'date-fns';
 import { likeComment, unlikeComment } from "../../services/comments"; //createComment needs to be added
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
-
-
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 const Comment = (props) => {
-    //console.log("this is the commentprops:", props)
-  // const navigate = useNavigate(); NOT BEING USED CURRENTLY
     const token = props.token;
-    // const postId = props.post._id;
     const commentId = props.comment._id;
     const commentTimestamp = props.comment.createdAt;
-    //console.log("This is the message",props.comment.message);
     const userId = localStorage.getItem("userId");
     const initialLikeCount = props.comment.likes.length;
     const initialLikeStatus = props.comment.likes.includes(userId)
@@ -50,11 +46,23 @@ const Comment = (props) => {
 
     setLikeStatus(!likeStatus)}
     return <div key={props.comment._id} className="comment">
-        <ProfilePicture userId={props.comment.user}/>
-        <h2>{props.comment.username} - {formattedTimestamp}</h2> 
-        <article>{props.comment.message}</article>
-        <button onClick={ handleLike }>{likeStatus ? 'Unlike' : 'Like'}</button>
-        <p>{likeCount} likes</p>
+    <div className="comment-body">
+        <div className="comment-header">
+            <ProfilePicture userId={props.comment.user}/>
+        </div>
+
+        <div className="single-comment">
+            <div className="comment-header">
+                <p className="comment-username-handle">{props.comment.username}</p>
+                <p className="comment-timestamp">{formattedTimestamp}</p> 
+            </div>
+            <article className="comment-content">{props.comment.message}</article>
+        </div>
+    </div>
+        <div className="comment-like-section">
+            <button className="comment-like-button" onClick={ handleLike }>{likeStatus ? <AiFillLike /> : <AiOutlineLike />}</button>
+            <p className="comment-like-count">{likeCount} likes</p>
+        </div>
         </div>
 };
 

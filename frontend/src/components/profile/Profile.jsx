@@ -50,9 +50,11 @@ export const Profile = () => {
         <>
             <Navbar/>
                 <main className="profile-main">
-                    <ProfilePicture userId={userId}/>
-                    <ProfilePictureUpload token={token}/> 
-                    <h1>{signedInUser.forename} {signedInUser.surname}</h1>
+                    <div className="profile-header">
+                        <ProfilePicture userId={userId}/>
+                        <ProfilePictureUpload token={token}/> 
+                        <h1>{signedInUser.forename} {signedInUser.surname}</h1>
+                    </div>
                     <h2 className="post-heading">Posts</h2>
                     <div className="profile-container" role="profile">
                         {posts.map(post => (
