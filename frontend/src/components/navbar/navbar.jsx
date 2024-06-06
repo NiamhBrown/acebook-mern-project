@@ -1,5 +1,6 @@
 // import React from "react";
 import "./navbar.css";
+import "../../App.css"
 import { useState, useEffect } from "react";
 import { Link , useNavigate} from "react-router-dom";
 import { SearchBar } from "./searchbar/SearchBar";
@@ -68,7 +69,7 @@ const Navbar =  (token) => {
                 </div>
             </div>
             <div className= "navbar-right">
-                <Link to = {"/requests"}>Friend Requests({requests})</Link>
+                <Link to = {"/requests"} className={requests > 0 ? 'link-notification': 'link'}>Friend Requests({requests})</Link>
                 <Link to = {"/friends"}>Friends</Link>
                 <Link to = {"/profile"}>Profile</Link>
                 <button onClick={handleLogout} id="button1">
