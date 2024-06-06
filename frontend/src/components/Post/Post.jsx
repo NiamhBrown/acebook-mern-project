@@ -1,4 +1,5 @@
 import "../../../css/post.css"
+import "../../../css/main.css"
 import { useState } from "react";
 import { formatDistanceToNow } from 'date-fns';
 import { likePost } from '../../services/posts';
@@ -6,9 +7,9 @@ import { unlikePost } from '../../services/posts';
 import SubmitComment from "../Comment/SubmitComment";
 import Comment from "../Comment/Comment";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 const Post = (props) => {
-  console.log("====PROPS.POST:",props.post)
   const token = props.token
   const postId = props.post._id
   const postTimestamp = props.post.createdAt
@@ -56,11 +57,17 @@ const Post = (props) => {
   };
 
   return <div key={postId} className="post">
-    <ProfilePicture userId={props.post.user}/>
-    <h2>{props.post.username} - {formattedTimestamp}</h2>
-    <article>{props.post.message}</article>
-    <button onClick={ handleLike }>{likeStatus ? 'Unlike' : 'Like'}</button>
-    <p>{likeCount} likes</p>
+    <div className="post-header">
+      <ProfilePicture userId={props.post.user}/>
+      <p className="username-handle">{props.post.username}</p>
+      <p className="timestamp">posted: {formattedTimestamp}</p>
+    </div>
+
+    <article className="post-content">{props.post.message}</article>
+
+    <button className="like-button" onClick={ handleLike }>{likeStatus ? <AiFillLike /> : <AiOutlineLike />}</button>
+    <p className="like-count">{likeCount} likes</p>
+
     <SubmitComment postId={postId} token={token} handleCommentCreated={handleCommentCreated} /> 
         {commentsList.map(comment => (
         <Comment comment={comment} token={token} key={comment._id} postId={postId} />

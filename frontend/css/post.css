@@ -1,29 +1,114 @@
+/* main post section */
 .post {
     border: 1px solid #ddd;
     padding: 16px;
     margin: 16px 0;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: hsl(0, 0%, 98%);
+    width: 1000px;
 }
 
-.post h2 {
-    font-size: 1.2em;
-    margin-bottom: 8px;
-}
-
-.post article {
+.post-header {
+    display: flex;
     margin-bottom: 16px;
 }
 
-.post button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+.post-header img {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc; /* Optional: Add a border */
 }
 
-.post button:hover {
-    background-color: #0056b3;
+.username-handle{
+    margin-left: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
 }
+
+.timestamp {
+    margin-left: auto; /* This pushes the timestamp to the right */
+    margin-top: 19.2px;
+    margin-bottom: 19.2px;
+    font-weight: lighter;
+}
+
+/* SubmitPost */
+textarea {
+    width: 100%;
+    height: 100px; /* Initial height */
+    max-width: 980px; /* Maximum width */
+    max-height: 65px; /* Maximum height */
+    resize: none; /* Allow both horizontal and vertical resizing */
+    border-radius: 10px;
+    padding:10px
+}
+
+.post-content {
+    padding: 10px;
+    margin: 10px 0px;
+} 
+
+.like-count {
+    display: inline;
+}
+
+/* comment section */
+.comment{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.comment-header {
+    display: flex;
+}
+
+.comment-header img {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc; /* Optional: Add a border */
+}
+
+.comment-username-handle{
+    margin-left: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.comment-timestamp {
+    margin-left: auto; /* This pushes the timestamp to the right */
+    margin-top: 19.2px;
+    margin-bottom: 19.2px;
+    font-weight: lighter;
+}
+
+.comment-content {
+    padding: 10px;;
+} 
+
+.comment-like-count {
+    display: inline;
+}
+
+.single-comment {
+    background-color: lightgrey;
+    border-radius: 10px;
+    width: 800px;
+    padding: 10px;
+}
+
+
+.comment-body {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px; /* Adjust spacing between ProfilePicture and single-comment */
+    }
+
+    .comment-like-section {
+        display: flex;
+        justify-content: flex-end; /* Align items to the right */
+        align-items: center; /* Center items vertically */
+        gap: 10px; /* Optional: Add space between items */
+    }

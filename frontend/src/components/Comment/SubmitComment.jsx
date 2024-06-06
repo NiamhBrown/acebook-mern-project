@@ -1,10 +1,8 @@
-// import React from 'react';
+import "../../../css/main.css"
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import { createComment } from "../../services/comments";
 
 export const SubmitComment = (props) => {
-    const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const token = props.token;
     const postId = props.postId;
@@ -15,10 +13,8 @@ export const SubmitComment = (props) => {
             const newComment = await createComment(token, message, postId);
             props.handleCommentCreated(newComment)
             setMessage("");
-            //navigate("/posts");
         } catch (err) {
             console.error(err);
-            //navigate("/posts");
         }
         
     };
@@ -32,7 +28,7 @@ export const SubmitComment = (props) => {
                 placeholder="Add a comment..."
                 onChange={(event) => setMessage(event.target.value)}></textarea>
                 <br />
-                <button type="submit">Create Comment</button>
+                <button type="submit" className="primary-button">Create Comment</button>
             </form>
         </div>
     );
