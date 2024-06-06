@@ -17,13 +17,11 @@ const ProfilePictureUpload = ({ token }) => {
         } catch (err) {
             console("Error uploading profile picture:", err);
         }
+        window.location.reload();
     };
 
     return (
-        // <div>
-        //     <input type="file" onChange={handleFileChange} />
-        //     <button onClick={handleUpload}>Add Profile Picture</button>
-        // </div>
+        
         <div>
         <button onClick={() => setIsFormVisible(!isFormVisible)}>
             {isFormVisible ? "Cancel" : "Upload Picture"}
