@@ -4,7 +4,6 @@ import { getPosts } from "../../services/posts";
 import Post from "../Post/Post";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import Navbar from "../../components/navbar/navbar"
-import defaultProfilePicture from "../../assets/default_picture.png";
 import ProfilePictureUpload from "../ProfilePicture/ProfilePictureUpload";
 import { getOneUser } from "../../services/users";
 import FriendsPage from "../../pages/Friend/FriendsPage";
@@ -15,11 +14,6 @@ export const Profile = () => {
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [signedInUser, setSignedInUser] = useState({forename: 'loading', username: 'loading'})
-
-    const serverUrl = "http://localhost:3000";
-    const profileImageUrl = signedInUser.profilePicture 
-    ? `${serverUrl}${signedInUser.profilePicture}` 
-    : defaultProfilePicture;
 
     useEffect(() => {
         if (token) {
@@ -38,14 +32,11 @@ export const Profile = () => {
             });
         }
         }, []);
-
-    console.log("USER POSTS !!!", posts)
     
     useEffect(() => {
         if (token) {
             getOneUser(token)
                 .then((data) => {
-                    console.log("!!!THIS IS DATA", data)
                     setSignedInUser(data.user[0]);
                     localStorage.setItem("token", data.token);
                 })
@@ -55,16 +46,12 @@ export const Profile = () => {
         }
         }, []);
 
-        console.log("THIS IS SIGNED IN USER profile pic", signedInUser.profilePicture)
-
     return token ? (
         <>
-        
             <Navbar/>
                 <main className="profile-main">
-                    <img src={profileImageUrl} alt="User's profile pic" style={{ width: '200px', height: '200px' }} />
+                    <ProfilePicture userId={userId}/>
                     <ProfilePictureUpload token={token}/> 
-                    <ProfilePicture token={token}/>
                     <h1>{signedInUser.forename} {signedInUser.surname}</h1>
                     <h2 className="post-heading">Posts</h2>
                     <div className="profile-container" role="profile">

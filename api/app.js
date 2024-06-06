@@ -31,8 +31,6 @@ app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", authenticationRouter);
 
 
-
-
 // 404 Handler
 app.use((_req, res) => {
   res.status(404).json({ err: "Error 404: Not Found" });

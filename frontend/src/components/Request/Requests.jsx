@@ -12,6 +12,7 @@
 //Deny button - delete(/friends) => otheruser database
 import React from "react";
 import { addFriend, denyFriend, removeFriend } from "../../services/users";
+import ProfilePicture from "../ProfilePicture/ProfilePicture";
 
 export const Request = ({user, currentUser }) => {
     const token = localStorage.getItem("token")
@@ -28,7 +29,7 @@ export const Request = ({user, currentUser }) => {
 
         return (
             <div>
-                <p>Picture</p>
+                <ProfilePicture userId={user._id}/>
                 <p>{user.forename} {user.surname}</p>
                 <button onClick={handleApprove}>Approve</button> 
                 <button onClick={handleDeny}>Deny</button>
