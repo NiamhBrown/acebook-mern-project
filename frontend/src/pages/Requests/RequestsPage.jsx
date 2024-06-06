@@ -34,17 +34,17 @@ export const RequestPage = () => {
                 throw new Error('Network response was not ok ' + usersResponse.statusText);
             }
             const usersData = await usersResponse.json();
-            console.log("usersData",usersData)
-            console.log("line 36",userID)
+            // console.log("usersData",usersData)
+            // console.log("line 36",userID)
             const currentUser = usersData.users.find((user) =>user._id === userID);
-            console.log("line 38",userID)
-            console.log("current user", currentUser)
+            // console.log("line 38",userID)
+            // console.log("current user", currentUser)
             const requestedUsers = usersData.users.filter(user => 
                 user.friends.includes(userID) &&
                 !currentUser.friends.includes(user._id) &&
                 user._id !== userID
             )
-            console.log('Requested users',requestedUsers)
+            // console.log('Requested users',requestedUsers)
             setRequest(requestedUsers);
             setCurrentUser(currentUser) 
         } catch(error) {

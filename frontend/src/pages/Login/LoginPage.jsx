@@ -49,6 +49,9 @@ export const LoginPage = () => {
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
+      <div>
+        <a href="/signup">Don't have an account? Sign up here</a>
+      </div>
     </>
   );
 };
