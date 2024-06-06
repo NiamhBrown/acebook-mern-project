@@ -1,8 +1,8 @@
 import "../../../css/post.css"
 import { useState } from "react";
-// import { useNavigate } from 'react-router-dom'; NOT BEING USED CURRENTLY
 import { formatDistanceToNow } from 'date-fns';
 import { likeComment, unlikeComment } from "../../services/comments"; //createComment needs to be added
+import ProfilePicture from "../ProfilePicture/ProfilePicture";
 
 
 
@@ -50,6 +50,7 @@ const Comment = (props) => {
 
     setLikeStatus(!likeStatus)}
     return <div key={props.comment._id} className="comment">
+        <ProfilePicture userId={props.comment.user}/>
         <h2>{props.comment.username} - {formattedTimestamp}</h2> 
         <article>{props.comment.message}</article>
         <button onClick={ handleLike }>{likeStatus ? 'Unlike' : 'Like'}</button>
