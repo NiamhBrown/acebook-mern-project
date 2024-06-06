@@ -7,6 +7,7 @@ import Navbar from "../../components/navbar/navbar"
 import defaultProfilePicture from "../../assets/default_picture.png";
 import ProfilePictureUpload from "../ProfilePicture/ProfilePictureUpload";
 import { getOneUser } from "../../services/users";
+import FriendsPage from "../../pages/Friend/FriendsPage";
 
 export const Profile = () => {
     const [posts, setPosts] = useState([]);
@@ -70,6 +71,7 @@ export const Profile = () => {
                         {posts.map(post => (
                             <Post key={post._id} post={post} token={token} user={signedInUser} />
                         ))}
+                        <FriendsPage/>
                     </div>
                 </main>
         </>

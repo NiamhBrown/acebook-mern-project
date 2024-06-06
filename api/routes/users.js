@@ -15,8 +15,12 @@ router.get("/getOneUser", tokenChecker, UsersController.getOneUser);
 router.post("/friends", tokenChecker, UsersController.addFriend);
 router.delete("/friends", tokenChecker, UsersController.removeFriend);
 
+
 router.post("/profilePicture", tokenChecker, upload.single("profilePicture"), UsersController.addProfilePicture);
 // router.delete("/profilePicture", tokenChecker, UsersController.removeProfilePicture);
+
+
+router.delete("/friends/deny", tokenChecker, UsersController.denyFriend);
 
 
 module.exports = router;

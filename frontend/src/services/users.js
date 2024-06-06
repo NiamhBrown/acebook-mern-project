@@ -104,3 +104,25 @@ export const uploadProfilePicture = async (token, file) => {
         return await response.json();
     }
 };
+
+export const denyFriend = async (token, friendUserId) => {
+    const payload = {
+        token:token,
+        friendUserId: friendUserId
+    };
+    const requestOptions = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+    }
+    let response = await fetch(`${BACKEND_URL}/users/friends/deny`, requestOptions);
+    if (response.status !== 200) {
+        throw new Error("Unable to remove friend");
+        } else {
+        return;
+        }
+};
+
