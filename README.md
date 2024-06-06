@@ -124,3 +124,6 @@ they should then show up in the browser if you refresh the page.
 
 ### One Repo to rule them all - Trello link:
 https://trello.com/b/PTe0t03g/one-repo-to-rule-them-all
+
+### 'uploads:
+you must create a folder called 'uploads' that sits directly under the 'api' directory. this is where users pictures will be served from, after they've been saved in the database. (this is related to the 'multer' middleware)
