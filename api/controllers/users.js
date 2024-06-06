@@ -101,7 +101,7 @@ const addProfilePicture = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error uploading profile picture" });
   };
-  
+}
 const denyFriend = async (req, res) => {
   try{
     const userId = req.user_id;
@@ -130,7 +130,7 @@ const UsersController = {
   getOneUser: getOneUser,
   addFriend: addFriend,
   removeFriend: removeFriend,
-  addProfilePicture: addProfilePicture
+  addProfilePicture: addProfilePicture,
   denyFriend: denyFriend
 
 
