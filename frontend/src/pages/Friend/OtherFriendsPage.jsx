@@ -32,9 +32,6 @@ export const OtherFriendsPage = ({friendUserId}) => {
                         user.friends.includes(otherUserId) // if you are in their friends lists
                     );
                 });
-                // console.log('otheruser',otherUser)
-                // console.log('otheruser friends',otherUser.friends)
-                // otherUser.friends.push(userID)
                 setResults(results);
                 setLoading(false);
             })
