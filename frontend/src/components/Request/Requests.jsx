@@ -32,9 +32,11 @@ export const Request = ({user, currentUser }) => {
         return (
             <div className="request">
                 <ProfilePicture userId={user._id}/>
-                <p>{user.forename} {user.surname}</p>
-                <button onClick={handleApprove}>Approve</button> 
-                <button onClick={handleDeny}>Deny</button>
+                <h2 className="name">{user.forename} {user.surname}</h2>
+                <div className="approve-button-container"> 
+                    <button className="primary-button" onClick={handleApprove}>Approve</button> 
+                    <button className="primary-button" onClick={handleDeny}>Deny</button>
+                </div>
             </div>
         )
 

@@ -159,9 +159,36 @@ textarea {
 
 /* Request */
 .request{
+align-items: center;
+grid-template-columns: 8% 50% 20%;
+grid-gap: 45px 100px;
+padding: 20px;
+background-color: rgb(226, 222, 222);
+border-radius: 14px;
+margin-top: 20px;
+display: grid;
+}
+.request img{
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc; /* Optional: Add a border */
+    
+    }
+
+
+.requests-container{
+    width: 1000px;
+    column-gap: 10px;
+    row-gap: 10px;
+    justify-content: center;
 
 }
 
+.approve-button-container{
+    text-align: left;
+}
 
 
 

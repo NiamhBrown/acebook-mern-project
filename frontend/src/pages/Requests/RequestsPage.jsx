@@ -63,7 +63,7 @@ export const RequestPage = () => {
             <>
                 <Navbar/>
                 <h1>Friend Requests</h1>
-                <div>
+                <div className="requests-container">
                     {request.map(user =>(
                         //<p key={user._id} user={user}>{user.forename}</p>
                         <Request key={user._id}user = {user}  currentUser = {currentUser}/>
