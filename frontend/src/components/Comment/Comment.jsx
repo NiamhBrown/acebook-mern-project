@@ -7,6 +7,7 @@ import ProfilePicture from "../ProfilePicture/ProfilePicture";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 const Comment = (props) => {
+    console.log("PROPSSSSS:",props)
     const token = props.token;
     const commentId = props.comment._id;
     const commentTimestamp = props.comment.createdAt;
@@ -45,15 +46,18 @@ const Comment = (props) => {
     }}
 
     setLikeStatus(!likeStatus)}
+
     return <div key={props.comment._id} className="comment">
     <div className="comment-body">
         <div className="comment-header">
+            <a href={`/profile/${props.comment.user}`}>
             <ProfilePicture userId={props.comment.user}/>
+            </a>
         </div>
 
         <div className="single-comment">
             <div className="comment-header">
-                <p className="comment-username-handle">{props.comment.username}</p>
+                <p className="comment-username-handle ">{props.comment.username}</p>
                 <p className="comment-timestamp">{formattedTimestamp}</p> 
             </div>
             <article className="comment-content">{props.comment.message}</article>

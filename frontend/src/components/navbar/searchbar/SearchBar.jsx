@@ -1,6 +1,6 @@
 import { FaSearch } from "react-icons/fa";
-import { useState, useEffect } from "react";
-import "./SearchBar.css";
+import { useState} from "react";
+import "../../../../css/SearchBar.css";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 
@@ -42,8 +42,8 @@ export const SearchBar = ({ setResults }) => {
     return (
         <div className="input-wrapper">
             <FaSearch id="search-icon" />
-            <input 
-                id="searchinput" type="text" placeholder="Search for new friends.." 
+            <input
+                id="searchinput" autoComplete="off" type="text" placeholder="Search for new friends.." 
                 value={input}  onChange={(e) => handleChange(e.target.value)}/>
         </div>
     )
