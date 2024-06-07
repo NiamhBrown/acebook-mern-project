@@ -108,7 +108,7 @@ a {
   
   /* Link hover state */
   a:hover .logo {
-    text-decoration: underline; /* Underline on hover if needed */
+    text-decoration: underline; Underline on hover if needed
     color: inherit; /* Inherit the color from the parent element */
   }
   
