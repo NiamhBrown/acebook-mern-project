@@ -68,26 +68,6 @@ export const SignupPage = () => {
   };
 
   const handlePasswordChange = (event) => {
-    // const { name, value } = event.target;
-
-    // let error = "";
-    // if (name === "password" && value.length < 8) {
-    //     error = "Password must be at least 8 characters long.";
-    //     console.log("Password must be at least 8 characters long.")
-    // } else if (name === "password" && /^\d*$/.test(value)) {
-    //     error = "Password must contain a special character.";
-    //     console.log("Password must contain a special character.")
-    // }
-
-    // // setFormData({
-    // //     ...formData,
-    // //     [name]: value
-    // // });
-
-    // setErrors({
-    //     ...errors,
-    //     [name]: error
-    // });
     setPassword(event.target.value);
   };
 
@@ -95,9 +75,9 @@ export const SignupPage = () => {
 
   return (
     <>
-      <h1>Acebook</h1>
+      <h1 className="heading">Acebook</h1>
       <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="forename">Forename:</label>
         <input
           id="forename"
@@ -140,10 +120,10 @@ export const SignupPage = () => {
           />
           {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
           <br />
-        <input role="submit-button" id="submit" type="submit" value="Submit" />
+        <input className="login-button" role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
       <div>
-        <a href="/login">Already have an account? Log in here</a>
+      <span>Already have an account? <a className="hyperlink" href="/login">Log in</a></span>
       </div>
     </>
   );

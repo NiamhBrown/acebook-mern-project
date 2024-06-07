@@ -159,7 +159,7 @@ textarea {
     display: flex;
     flex-direction: column; /* Stack children vertically */
     align-items: flex-start; /* Align items to the left */
-    gap: 10px; /* Optional: Add space between elements */
+    gap: 2px
 }
 
 .login-form label {

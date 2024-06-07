@@ -67,9 +67,13 @@ const UserProfile = ({ user }) => {
         <>
             <Navbar />
             <main className="profile-main">
+                <div className="profile-header">
                 <ProfilePicture userId={friendUserId}/>
                 <h1>{friendUser.forename} {friendUser.surname}</h1>
+                <div >
                 <FriendToggle friendId={friendUserId} userId={userId}  user={signedInUser} isFriend={isFriend} setIsFriend={setIsFriend} />
+                </div>
+                </div>
                 <h2 className="post-heading">Posts</h2>
                 <div className="profile-container" role="profile">
                     {posts.map(post => (
