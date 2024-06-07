@@ -98,29 +98,28 @@
 a {
     text-decoration: none; /* Remove underline */
     color: inherit; /* Inherit the color from the parent element */
-  }
-  
+}
   /* Specific styling for your link */
-  a .logo {
+a .logo {
     text-decoration: none; /* Remove underline */
     color: inherit; /* Inherit the color from the parent element */
-  }
-  
+}
+
   /* Link hover state */
-  a:hover .logo {
+a:hover .logo {
     text-decoration: underline; Underline on hover if needed
     color: inherit; /* Inherit the color from the parent element */
-  }
-  
+}
+
   /* Link active state */
-  a:active .logo {
+a:active .logo {
     text-decoration: underline; /* Underline on click if needed */
     color: inherit; /* Inherit the color from the parent element */
-  }
-  
+}
+
   /* Link visited state */
-  a:visited .logo {
+a:visited .logo {
     text-decoration: underline; /* Underline if needed */
     color: inherit; /* Inherit the color from the parent element */
-  }
-  
+}
+
