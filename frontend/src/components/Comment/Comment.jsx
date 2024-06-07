@@ -53,12 +53,11 @@ const Comment = (props) => {
             <a href={`/profile/${props.comment.user}`}>
             <ProfilePicture userId={props.comment.user}/>
             </a>
-            
         </div>
 
         <div className="single-comment">
             <div className="comment-header">
-                <p className="comment-username-handle">{props.comment.username}</p>
+                <p className="comment-username-handle ">{props.comment.username}</p>
                 <p className="comment-timestamp">{formattedTimestamp}</p> 
             </div>
             <article className="comment-content">{props.comment.message}</article>
