@@ -39,7 +39,7 @@ function FriendToggle({ userId, friendId, isFriend, setIsFriend }) {
     };
 
     return (
-        <button onClick={handleAdd}>
+        <button className="primary-button" onClick={handleAdd}>
             {localIsFriend ? 'Unfriend' : 'Add Friend'}
         </button>
     );

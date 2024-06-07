@@ -27,6 +27,15 @@
     font-weight: bold;
 }
 
+.username-hyperlink{
+    color: black;
+    text-decoration: none;
+
+}
+.username-hyperlink:hover{
+    text-decoration: underline;
+
+}
 .timestamp {
     margin-left: auto; /* This pushes the timestamp to the right */
     margin-top: 19.2px;
@@ -191,7 +200,33 @@ display: grid;
 }
 
 
+/* login-page and signup page */
+.login-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.login-form {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-start; /* Align items to the left */
+    gap: 2px
+}
+
+.login-form label {
+    margin-bottom: 5px; /* Optional: Space below labels */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="submit"] {
+    width: 100%; /* Make inputs take full width */
+    padding: 8px; /* Add padding for better appearance */
+    margin-bottom: 10px; /* Space below inputs */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
 
 
-
-/* Request Page */
