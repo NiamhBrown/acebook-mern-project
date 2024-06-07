@@ -40,6 +40,7 @@ export const LoginPage = () => {
           id="email"
           type="text"
           value={email}
+          autoComplete="off"
           onChange={handleEmailChange}
         />
         <label htmlFor="password">Password:</label>

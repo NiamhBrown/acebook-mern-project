@@ -83,6 +83,7 @@ export const SignupPage = () => {
           id="forename"
           type="text"
           value={forename}
+          autoComplete="off"
           onChange={(event) => setForename(event.target.value)}
         />
         <br />
@@ -91,6 +92,7 @@ export const SignupPage = () => {
           id="surname"
           type="text"
           value={surname}
+          autoComplete="off"
           onChange={(event) => setSurname(event.target.value)}
         />
         <br />
@@ -99,6 +101,7 @@ export const SignupPage = () => {
           id="username"
           type="text"
           value={username}
+          autoComplete="off"
           onChange={(event) => setUsername(event.target.value)}
         />
         <br />
@@ -107,6 +110,7 @@ export const SignupPage = () => {
           id="email"
           type="text"
           value={email}
+          autoComplete="off"
           onChange={handleEmailChange}
         />
         <br />

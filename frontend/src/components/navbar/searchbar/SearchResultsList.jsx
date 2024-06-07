@@ -1,11 +1,7 @@
-import "../searchbar/SearchResultList.css";
+import "../../../../css/SearchResultList.css";
 import { SearchResult } from "../searchbar/SearchResults";
-import { useState, useEffect } from "react";
-
 
 export const SearchResultsList = ({ results }) => {
-
-
     return (
         <div className="results-list">
             {results.map((result, id) => {

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar";
-import "./Profile.css";
 import Post from "../Post/Post";
 import FriendToggle from "./FriendToggle";
 import { OtherFriendsPage } from "../../pages/Friend/OtherFriendsPage";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 const UserProfile = ({ user }) => {
     const [posts, setPosts] = useState([]);

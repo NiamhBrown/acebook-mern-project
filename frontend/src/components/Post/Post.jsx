@@ -58,7 +58,9 @@ const Post = (props) => {
 
   return <div key={postId} className="post">
     <div className="post-header">
+    <a href={`/profile/${props.post.user}`}>
       <ProfilePicture userId={props.post.user}/>
+    </a>
       <p className="username-handle">{props.post.username}</p>
       <p className="timestamp">posted: {formattedTimestamp}</p>
     </div>

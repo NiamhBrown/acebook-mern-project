@@ -1,5 +1,4 @@
-// import React from "react";
-import "./navbar.css";
+import "../../../css/navbar.css";
 import "../../App.css"
 import { useState, useEffect } from "react";
 import { Link , useNavigate} from "react-router-dom";
@@ -50,15 +49,13 @@ const Navbar =  (token) => {
             }
         },[token, userID] )
 
-
-
     return (
         <nav className="navbar" id="navbar">
             <div className = "container">
                 <img src={logo} alt="page logo" id="logo_img"/>
                 <div>
                     <Link to="/posts">
-                        <div id="logo">Acebook</div>
+                        <div className="logo">Acebook</div>
                     </Link>
                 </div>
             </div>
@@ -70,9 +67,9 @@ const Navbar =  (token) => {
             </div>
             <div className= "navbar-right">
                 <Link to = {"/requests"} className={requests > 0 ? 'link-notification': 'link'}>Friend Requests({requests})</Link>
-                <Link to = {"/friends"}>Friends</Link>
-                <Link to = {"/profile"}>Profile</Link>
-                <button onClick={handleLogout} id="button1">
+                <Link to = {"/friends"} className="link">Friends</Link>
+                <Link to = {"/profile"} className="link">Profile</Link>
+                <button onClick={handleLogout} id="navbar-logout-button">
                     Log out 
                 </button>
             </div>
