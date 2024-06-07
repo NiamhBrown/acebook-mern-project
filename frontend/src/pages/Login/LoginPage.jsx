@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { login } from "../../services/authentication";
+import "../../../css/post.css"
+import "../../../css/main.css"
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -31,8 +32,8 @@ export const LoginPage = () => {
 
   return (
     <>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <h1 className="heading">Login</h1>
+      <form onSubmit={handleSubmit} className="login-form">
         <label htmlFor="email">Email:</label>
         <input
           id="email"
@@ -47,10 +48,10 @@ export const LoginPage = () => {
           value={password}
           onChange={handlePasswordChange}
         />
-        <input role="submit-button" id="submit" type="submit" value="Submit" />
+        <input className="login-button" role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
       <div>
-        <a href="/signup">Don't have an account? Sign up here</a>
+        <span>Don't have an account? <a className="hyperlink" href="/signup">Sign up</a></span>
       </div>
     </>
   );

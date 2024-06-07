@@ -32,9 +32,7 @@ export const SignupPage = () => {
   useEffect(()=>{
     const capitalLetterRegex = /[A-Z]/;
     const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
-    // 8 characters
-    // a special character
-    // at least one capital letter
+
     let error = ""; 
       const validatePassword = () => {
         if (password.length < 8){

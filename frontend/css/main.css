@@ -1,5 +1,11 @@
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
 .heading {
     text-align: center;
+
 }
 
 .primary-button, .like-button, .comment-like-button {
@@ -26,4 +32,14 @@
     display: block;
     margin: 0 auto;
     text-align: center;
+}
+
+.hyperlink {
+    color: #0056b3;
+    text-decoration: none;
+
+}
+
+.hyperlink:hover {
+    text-decoration: underline;
 }
