@@ -13,6 +13,8 @@
 import React from "react";
 import { addFriend, denyFriend, removeFriend } from "../../services/users";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
+import "../../../css/post.css"
+import "../../../css/main.css"
 
 export const Request = ({user, currentUser }) => {
     const token = localStorage.getItem("token")
@@ -28,7 +30,7 @@ export const Request = ({user, currentUser }) => {
     }
 
         return (
-            <div>
+            <div className="request">
                 <ProfilePicture userId={user._id}/>
                 <p>{user.forename} {user.surname}</p>
                 <button onClick={handleApprove}>Approve</button> 
