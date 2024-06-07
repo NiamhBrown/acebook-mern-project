@@ -137,7 +137,7 @@ textarea {
 
 }
 
-/* friends page */
+/* friend's page */
 .single-friend img{
     width: 150px; /* Adjust the size as needed */
     height: 150px; /* Adjust the size as needed */
@@ -151,9 +151,54 @@ textarea {
     display: flex;
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Optional: Center align items */
-    gap: 10px; /* Optional: Add space between items */
+    gap: 20px; /* Optional: Add space between items */
     margin: 20px;
 }
+
+/* Friends page */
+.friends-container{
+    width:1000px;
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+    grid-gap: 45px 100px;
+    padding: 20px;
+
+}
+
+
+/* Request */
+.request{
+align-items: center;
+grid-template-columns: 8% 50% 20%;
+grid-gap: 45px 100px;
+padding: 20px;
+background-color: rgb(226, 222, 222);
+border-radius: 14px;
+margin-top: 20px;
+display: grid;
+}
+.request img{
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc; /* Optional: Add a border */
+    
+    }
+
+
+.requests-container{
+    width: 1000px;
+    column-gap: 10px;
+    row-gap: 10px;
+    justify-content: center;
+
+}
+
+.approve-button-container{
+    text-align: left;
+}
+
 
 /* login-page and signup page */
 .login-button {
@@ -183,4 +228,5 @@ textarea {
     margin-bottom: 10px; /* Space below inputs */
     box-sizing: border-box; /* Ensure padding is included in the width */
 }
+
 
